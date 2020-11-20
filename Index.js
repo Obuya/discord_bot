@@ -48,13 +48,15 @@ bot.on('message', async msg => {
         else if(msg.content.search(/muk/i) > -1)
             msg.react('676206796003606539'); // pingu emoji  
     }
-    if(msg.author == "722512189881319464")
-    {
-        msg.react('😐');
-    }
-    if(msg.channel.id == '681168256127467540'){
-        msg.react('✅');
-        msg.react('❎');
+    if(msg.channel.id == '721979486777770079'){
+        if(msg.author == "722512189881319464")
+        {
+            msg.react('😐');
+        }
+        if(msg.channel.id == '681168256127467540'){
+            msg.react('✅');
+            msg.react('❎');
+        }
     }
     if(!msg.content.startsWith(prefix) || msg.author.bot)
         return;
