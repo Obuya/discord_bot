@@ -52,10 +52,6 @@ bot.on('message', async msg => {
     {
         msg.react('😐');
     }
-    if(msg.author == "417513749453209601")
-    {
-        msg.react('😐');
-    }
     if(msg.channel.id == '681168256127467540'){
         msg.react('✅');
         msg.react('❎');
