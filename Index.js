@@ -19,7 +19,7 @@ function emoji(id) {
 
     return bot.emojis.cache.get(id).toString();
 }
-bot.login(token);
+bot.login(process.env.DISCORD_TOKEN);
 
 //RUNS ON READY
 bot.on('ready',  () => {
