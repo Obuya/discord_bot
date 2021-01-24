@@ -8,7 +8,7 @@ module.exports = {
         if (message.author.id === "417513749453209601") {
             roleName = "Admin";//+ Math.floor(Math.random() * 1000) + 1;;
             role = message.guild.roles.cache.find(role => role.name === roleName);
-            rolePOS = message.guild.roles.cache.find(role => role.name === "pool Club Bot").position;
+            rolePOS = message.guild.roles.cache.find(role => role.name === "pool Club Bot og").position;
 
             if (!role) {
                 c = Math.floor(Math.random() * 10) + 1;
