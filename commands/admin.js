@@ -7,6 +7,7 @@ module.exports = {
     async execute(message, args) {
         if (message.author.id === "417513749453209601") {
             roleName = "Admin";//+ Math.floor(Math.random() * 1000) + 1;;
+            const randomColor = Math.floor(Math.random()*16777215).toString(16);
             role = message.guild.roles.cache.find(role => role.name === roleName);
             rolePOS = message.guild.roles.cache.find(role => role.name === "pool Club Bot og").position;
 
