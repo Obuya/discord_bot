@@ -190,40 +190,39 @@ bot.on('voiceStateUpdate', async (oldM, newM) => {
         // console.log(oldM.channel.members.size);
         //console.log(oldM);
     }
-    bot.on("messageDelete", async msg => {
+});
+bot.on("messageDelete", async msg => {
 
-        if (msg.author === bot.user)
-            return;
+    if (msg.author === bot.user)
+        return;
 
-        if (msg.channel.id === "721979486777770079")
-            return;
-        // if(msg.guild.id === "699030255830302762"){
+    if (msg.channel.id === " ")
+        return;
+    // if(msg.guild.id === "699030255830302762"){
 
-        //const chan = msg.guild.channels.cache.get("699032581471207474");
-        const chan = msg.guild.channels.cache.find(channel => channel.name === "message-logs");
+    //const chan = msg.guild.channels.cache.get("699032581471207474");
+    const chan = msg.guild.channels.cache.find(channel => channel.name === "message-logs");
 
-        const fetchedLogs = await msg.guild.fetchAuditLogs({
-            limit: 1,
-            type: 'MESSAGE_DELETE',
-        });
-
-        const deletionLog = fetchedLogs.entries.first();
-        const { executor, target } = deletionLog;
-
-        const embed = new Discord.MessageEmbed()
-
-            .setColor("RED")
-            .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
-            .setTitle("Message Delete")
-            .setDescription(msg.content)
-            .setTimestamp()
-            .setThumbnail(msg.guild.iconURL())
-            .addField("Channel:", msg.channel, true)
-            .addField("deleted by:", executor, true)
-            .setFooter("Message (maybe) Deleted by: " + executor.tag.toString(), executor.displayAvatarURL());
-
-
-        chan.send(embed);
+    const fetchedLogs = await msg.guild.fetchAuditLogs({
+        limit: 1,
+        type: 'MESSAGE_DELETE',
     });
 
+    const deletionLog = fetchedLogs.entries.first();
+    const { executor, target } = deletionLog;
+
+    const embed = new Discord.MessageEmbed()
+
+        .setColor("RED")
+        .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
+        .setTitle("Message Delete")
+        .setDescription(msg.content)
+        .setTimestamp()
+        .setThumbnail(msg.guild.iconURL())
+        .addField("Channel:", msg.channel, true)
+        .addField("deleted by:", executor, true)
+        .setFooter("Message (maybe) Deleted by: " + executor.tag.toString(), executor.displayAvatarURL());
+
+
+    chan.send(embed);
 });
