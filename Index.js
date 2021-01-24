@@ -58,14 +58,12 @@ bot.on('message', async msg => {
     //     msg.react('✅');
     //     msg.react('❎');
     // }
-    if (msg.channel.id == '665003778747138074') {
         var str = msg.content;
         var pat = /<@!695655131831861350>/i;
         result = str.match(pat);
         if (result) {
             msg.channel.send("i am over here! but i am sick, so pls dont call for me!");
         }
-    }
     if (!msg.content.startsWith(prefix) || msg.author.bot)
         return;
     const args = msg.content.slice(prefix.length).split(/ +/);
