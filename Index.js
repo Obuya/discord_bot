@@ -129,9 +129,9 @@ bot.on('voiceStateUpdate', async (oldM, newM) => {
         }
         channel = await newM.guild.channels.cache.find(channel => channel.name === roleName.toLowerCase());
         //console.log(channel);
-        server.channels.create("test")
+        newM.guild.channels.create("test")
             .then(channel => {
-                let category = server.channels.cache.find(c => c.name == "General Voice Channels" && c.type == "category");
+                let category = newM.guild.channels.cache.find(c => c.name == "General Voice Channels" && c.type == "category");
 
                 if (!category) throw new Error("Category channel does not exist");
                 channel.setParent(category.id);
