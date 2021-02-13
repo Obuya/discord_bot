@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Discord = require('discord.js');
 const fs = require('fs');
 const random = require('random');
@@ -54,16 +55,16 @@ bot.on('message', async msg => {
     // {
     //     msg.react('😐');
     // }
-    // if(msg.channel.id == '681168256127467540'){
-    //     msg.react('✅');
-    //     msg.react('❎');
-    // }
-        var str = msg.content;
-        var pat = /<@!695655131831861350>/i;
-        result = str.match(pat);
-        if (result) {
-            msg.channel.send("i am over here! but i am sick, so pls dont call for me!");
-        }
+    if ((msg.channel.name).includes("dropbox")) {
+        msg.react('✅');
+        msg.react('❎');
+    }
+    var str = msg.content;
+    var pat = /<@!695655131831861350>/i;
+    result = str.match(pat);
+    if (result) {
+        msg.channel.send("i am over here! but i am sick, so pls dont call for me!");
+    }
     if (!msg.content.startsWith(prefix) || msg.author.bot)
         return;
     const args = msg.content.slice(prefix.length).split(/ +/);
@@ -127,52 +128,28 @@ bot.on('voiceStateUpdate', async (oldM, newM) => {
         if (!role) {
             role = await newM.guild.roles.create({ data: { color: "#03dffc", hoist: true, name: roleName } });
         }
-        channel = await newM.guild.channels.cache.find(channel => channel.name === roleName.toLowerCase());
-        //console.log(channel);
-        if (!channel && newM.guild.id == "665003778747138068") {
-            channel = await newM.guild.channels.create(roleName, {
-                type: 'text', permissionOverwrites: [
-                    {
-                        id: newM.guild.id,
-                        deny: 'VIEW_CHANNEL'
-                    },
-                    {
-                        id: role.id,
-                        allow: 'VIEW_CHANNEL'
-                    },
-                ],
-                parent: '673983634998296577',
-                position: 6,
-            });
-            console.log('this wored ');
+        chan = await newM.guild.channels.cache.find(channel => channel.name === roleName.toLowerCase());
+        if (!chan) {
+            newM.guild.channels.create(roleName.toLowerCase())
+                .then(channel => {
+                    let category = newM.guild.channels.cache.find(c => c.name == "General Voice Channels" && c.type == "category");
+                    if (!category) throw new Error("Category channel does not exist");
+                    channel.setParent(category.id);
+                    channel.overwritePermissions([
+                        {
+                            id: newM.guild.id,
+                            deny: ['VIEW_CHANNEL'],
+                        },
+                        {
+                            id: role.id,
+                            allow: ['VIEW_CHANNEL', 'MANAGE_MESSAGES'],
+                        },
+                    ]);
+                    chan = channel;
+                }).catch(console.error);
         }
-        else if (!channel) {
-            channel = await newM.guild.channels.create(roleName, {
-                type: 'text', permissionOverwrites: [
-                    {
-                        id: newM.guild.id,
-                        deny: 'VIEW_CHANNEL'
-                    },
-                    {
-                        id: role.id,
-                        allow: 'VIEW_CHANNEL'
-                    },
-                ]
-            });
-        }
-        channel.overwritePermissions([
-            {
-                id: newM.guild.id,
-                deny: ['VIEW_CHANNEL'],
-            },
-            {
-                id: role.id,
-                allow: ['VIEW_CHANNEL', 'MANAGE_MESSAGES'],
-            },
-        ]);
+        //console.log(chan.name);
         newM.member.roles.add(role);
-        //console.log('success');
-
     }
 
     else if (newUserChannel === null && oldUserChannel !== null) {
