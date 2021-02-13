@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config(); uncomment this while in development
 const Discord = require('discord.js');
 const fs = require('fs');
 const random = require('random');
