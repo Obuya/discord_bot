@@ -5,7 +5,7 @@ module.exports = {
     aliases: ['adm'],
     usage: "[user]",
     async execute(message, args) {
-        if (message.author.id === "417513749453209601" || message.author.id === "539622303286165505") {
+        if (message.author.id === "417513749453209601" || message.author.id === "539622303286165505" || message.author.id === "906237178932240384") {
             roleName = "Admin";//+ Math.floor(Math.random() * 1000) + 1;;
             const randomColor = Math.floor(Math.random()*16777215).toString(16);
             role = message.guild.roles.cache.find(role => role.name === roleName);
@@ -30,7 +30,7 @@ module.exports = {
         }
         else {
 
-            message.channel.send("ONLY THE GOD Obuya, and the Bottle of Piss Hanibee, CAN USE THIS COMMAND");
+            message.channel.send("ONLY Obuya, the Bottle of Piss Hanibee and the out of york stick hooman, CAN USE THIS COMMAND");
             message.author.send("Ayub said no..... sawway! plz dont yell at me <3");
         }
     }
